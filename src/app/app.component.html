@@ -1,9 +1,102 @@
 <h1>{{title}}</h1>
 <button [disabled]="isDisabled" type="button">{{btn}}</button>
-<img [src]="ImgAngular" width="500" height="500" alt="angular image" />
+<img [src]="ImgAngular" width="300" height="300" alt="angular image" />
 
 <div [style.backgroundColor]="bgColor">
   <h1 [style.color]="TextColor">Title</h1>
   <p [style.color]="DcColor">Description</p>
 </div>
 <h2 [class.textColor]="redText == 'abcd'">Title</h2>
+
+<p> {{counter}} </p>
+<button (click)="increamentCounter()">Add</button>
+<button (click)="decreamentCounter()">Minus</button>
+
+<input [(ngModel)]="InputText" placeholder="Enter text" />
+<p>You entered: {{ InputText }}</p>
+
+<div [ngClass]="classes">
+  <p>{{message}}</p>
+  <p>{{message}}</p>
+</div>
+
+<div class="color-box">
+  {{message}}
+</div>
+
+<div [ngStyle]="{'background-color':selectedColor, 'font-size':Tsize}">
+  testing
+</div>
+
+<div
+  *ngIf="isLoggedIn"
+  [ngStyle]="{'font-size':Tsize, 'display':type}">
+  Welcome, <span> {{UserName}}</span>
+</div>
+<button (click)="LogIn()" type="button" *ngIf="!isLoggedIn">Log In</button>
+<button (click)="LogOut()" type="button" *ngIf="isLoggedIn">Log Out</button>
+
+<ul>
+  <li *ngFor="let name of Names; let i = index">
+    {{name}} {{i}}
+  </li>
+</ul>
+
+<div [ngSwitch]="Mark">
+  <p *ngSwitchCase="'A'">Excellent</p>
+  <p *ngSwitchCase="'B'">Good</p>
+</div>
+
+<div class="List">
+  <!-- $first $last $even -->
+  @for (item of items ; track item.id; let i = $index; let total = $count )
+  {
+  <p>{{item.id}}</p>
+  <p>{{item.name}}</p>
+  }
+</div>
+
+<!-- <div class="Choose">
+  @switch (grade){
+  @case ('A'){
+  <p>Excellent</p>
+  }
+  @case ('B'){
+  <p>good</p>
+  }
+  @case ('C'){
+  <p>Bad</p>
+  }
+  @default{
+  <p>Unkown</p>
+  }
+  }
+</div> -->
+
+<!-- //Using pipes Dates and Time -->
+<h2>{{PipeName | uppercase}}</h2>
+<h1>{{PipeName | lowercase}}</h1>
+<br>
+<p> [Current date]: {{Date | date}}</p>
+<p> [Full date]: {{Date | date :"fullDate" | uppercase}}</p>
+<p> [Short date]: {{Date | date :"short"}}</p>
+<p> [Long date]: {{Date | date :"long" }}</p>
+<p> [Meduim date]: {{Date | date :"h:m" }}</p>
+
+<!-- //Using pipes Currency -->
+<p>{{curency | currency : 'USD' : "symbol" }}</p>
+<p>{{curency | currency : 'EUR' : "symbol" }}</p>
+<p>{{curency | percent : ''}}</p>
+
+<!-- //Using Custom Pipes -->
+<p>{{title | append: ' new text' | uppercase }}</p>
+
+<!-- Using Dependcy Injection raw data -->
+{{data}}
+
+<!-- Using Dependcy Injection Api data -->
+<h1>posts</h1>
+<div *ngFor="let post of Posts">
+  <h2>{{post.title}}</h2>
+  <h3>{{post.body}}</h3>
+</div>
